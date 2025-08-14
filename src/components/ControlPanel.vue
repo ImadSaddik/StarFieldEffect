@@ -1,7 +1,7 @@
 <template>
   <div class="star-control-panel">
     <div class="control-header">
-      <h2 class="control-title" :style="{ marginRight: isOpen ? '0px' : '32px' }">Star Field Controls</h2>
+      <h2 class="control-title" :style="{ marginRight: isOpen ? '0px' : '32px' }">Star field controls</h2>
       <button
         class="toggle-btn icon-btn"
         @click="isOpen = !isOpen"
