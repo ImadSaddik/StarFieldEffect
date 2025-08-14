@@ -1,20 +1,17 @@
 <template>
-  <!-- <StarBackground :config="starConfig" />
-  <ControlPanel :config="starConfig" @update:config="updateStarConfig" /> -->
-  <StarWithDiffractionSpikes />
+  <StarBackground :config="starConfig" />
+  <ControlPanel :config="starConfig" @update:config="updateStarConfig" />
 </template>
 
 <script>
-// import StarBackground from "./components/StarBackground.vue";
-// import ControlPanel from "./components/ControlPanel.vue";
-import StarWithDiffractionSpikes from "./components/StarWithDiffractionSpikes.vue";
+import StarBackground from "./components/StarBackground.vue";
+import ControlPanel from "./components/ControlPanel.vue";
 
 export default {
   name: "App",
   components: {
-    // StarBackground,
-    // ControlPanel,
-    StarWithDiffractionSpikes,
+    StarBackground,
+    ControlPanel,
   },
   data() {
     return {
