@@ -5,15 +5,39 @@
 <script>
 export default {
   name: "StarBackground",
+  props: {
+    config: {
+      type: Object,
+      default: () => ({
+        numStars: 120,
+        speedMin: 0.05,
+        speedMax: 0.2,
+        radiusMin: 0.3,
+        radiusMax: 1.5,
+        alphaMin: 0.3,
+        alphaMax: 0.8,
+        spikeChance: 0.1,
+        spikeLength: 3,
+        glowIntensity: 8,
+      }),
+    },
+  },
   data() {
     return {
       stars: [],
-      numStars: 120,
       width: window.innerWidth,
       height: window.innerHeight,
       context: null,
       animationFrameId: null,
     };
+  },
+  watch: {
+    config: {
+      handler() {
+        this.initStars();
+      },
+      deep: true,
+    },
   },
   methods: {
     initStars() {
@@ -27,16 +51,20 @@ export default {
         "#ffb347", // Orange
       ];
       this.stars = [];
-      for (let i = 0; i < this.numStars; i++) {
+      for (let i = 0; i < this.config.numStars; i++) {
+        const speedRange = this.config.speedMax - this.config.speedMin;
+        const radiusRange = this.config.radiusMax - this.config.radiusMin;
+        const alphaRange = this.config.alphaMax - this.config.alphaMin;
+
         this.stars.push({
           positionX: Math.random() * this.width,
           positionY: Math.random() * this.height,
-          radius: Math.random() * 1.2 + 0.3,
-          alpha: Math.random() * 0.5 + 0.3,
-          stepSizeX: (Math.random() - 0.5) * 0.15,
-          stepSizeY: (Math.random() - 0.5) * 0.15,
+          radius: Math.random() * radiusRange + this.config.radiusMin,
+          alpha: Math.random() * alphaRange + this.config.alphaMin,
+          stepSizeX: (Math.random() - 0.5) * speedRange + this.config.speedMin,
+          stepSizeY: (Math.random() - 0.5) * speedRange + this.config.speedMin,
           color: starColors[Math.floor(Math.random() * starColors.length)],
-          hasSpikes: Math.random() < 0.1,
+          hasSpikes: Math.random() < this.config.spikeChance,
         });
       }
     },
@@ -48,7 +76,7 @@ export default {
         if (star.hasSpikes) {
           // Draw diffraction spikes (JWST style)
           const numSpikes = 6;
-          const spikeLength = star.radius * 3 + Math.random() * 2;
+          const spikeLength = star.radius * this.config.spikeLength + Math.random() * 2;
           const spikeWidth = Math.max(0.5, star.radius * 0.5);
           for (let i = 0; i < numSpikes; i++) {
             const angle = (i * Math.PI) / (numSpikes / 2);
@@ -60,7 +88,7 @@ export default {
             this.context.lineTo(0, -spikeLength);
             this.context.strokeStyle = star.color;
             this.context.shadowColor = star.color;
-            this.context.shadowBlur = 8;
+            this.context.shadowBlur = this.config.glowIntensity;
             this.context.lineWidth = spikeWidth;
             this.context.globalAlpha = star.alpha * 0.7;
             this.context.stroke();
@@ -72,7 +100,7 @@ export default {
         this.context.arc(star.positionX, star.positionY, star.radius, 0, 2 * Math.PI);
         this.context.fillStyle = star.color;
         this.context.shadowColor = star.color;
-        this.context.shadowBlur = 8;
+        this.context.shadowBlur = this.config.glowIntensity;
         this.context.globalAlpha = star.alpha;
         this.context.fill();
         this.context.restore();
