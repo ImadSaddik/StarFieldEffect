@@ -1,9 +1,15 @@
-<template></template>
+<template>
+  <StarBackground />
+</template>
 
 <script>
+import StarBackground from "./components/StarBackground.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    StarBackground,
+  },
 };
 </script>
 
