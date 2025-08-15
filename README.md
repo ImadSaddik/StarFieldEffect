@@ -8,7 +8,7 @@ A simple and customizable star field effect created with Vue.js and HTML5 Canvas
 
 Try it out here: [https://imadsaddik.github.io/StarFieldEffect/](https://imadsaddik.github.io/StarFieldEffect/)
 
-[Will be added soon.]
+https://github.com/user-attachments/assets/20bdc1b0-c266-4aeb-8ad5-1a15a5f692c3
 
 Watch my [YouTube tutorial](https://youtu.be/7tom-m31LTU) on how to create this effect.
 
