@@ -10,7 +10,7 @@ Try it out here: [https://imadsaddik.github.io/StarFieldEffect/](https://imadsad
 
 [Will be added soon.]
 
-Watch my YouTube tutorial on how to create this effect: [Not yet finished]
+Watch my [YouTube tutorial](https://youtu.be/7tom-m31LTU) on how to create this effect.
 
 ## Features
 
